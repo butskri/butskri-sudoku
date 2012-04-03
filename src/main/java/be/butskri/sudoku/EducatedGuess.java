@@ -64,6 +64,7 @@ public class EducatedGuess<T> implements CellValueDecorator<T> {
 		return cell2;
 	}
 
+	@Override
 	public CellValue<T> decorate(CellValue<T> cellValue) {
 		if (cellValue.isSolved()) {
 			return cellValue;
@@ -71,6 +72,7 @@ public class EducatedGuess<T> implements CellValueDecorator<T> {
 		return new CellValueForEducatedGuess<T>(this, cellValue);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public CellValue<T> undecorate(CellValue<T> cellValue) {
 		if (isDecoratedForCurrentGuess(cellValue)) {
@@ -97,20 +99,24 @@ public class EducatedGuess<T> implements CellValueDecorator<T> {
 			this.decoratedObject = decoratedObject;
 		}
 
+		@Override
 		public Set<T> getAllPossibleValues() {
 			Set<T> result = new HashSet<T>(decoratedObject.getAllPossibleValues());
 			result.removeAll(removedValues);
 			return result;
 		}
 
+		@Override
 		public void stepToSolution(Collection<Group<T>> groups) {
 			removedValues.addAll(getAllSolvedValues(groups));
 		}
 
+		@Override
 		public void removePossibleValue(T guess) {
 			removedValues.add(guess);
 		}
 
+		@Override
 		public void setValue(T value) {
 			removedValues = new HashSet<T>(decoratedObject.getAllPossibleValues());
 			removedValues.remove(value);

@@ -15,19 +15,23 @@ public class BasicCellValue<T> extends AbstractBasicCellValue<T> {
 		this.allPossibleValues = new HashSet<T>(allPossibleValues);
 	}
 
+	@Override
 	public Set<T> getAllPossibleValues() {
 		return Collections.unmodifiableSet(allPossibleValues);
 	}
 
+	@Override
 	public void stepToSolution(Collection<Group<T>> groups) {
 		allPossibleValues.removeAll(getAllSolvedValues(groups));
 	}
 
+	@Override
 	public void removePossibleValue(T guess) {
 		allPossibleValues.remove(guess);
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public void setValue(T value) {
 		allPossibleValues = Sets.<T> newHashSet(value);

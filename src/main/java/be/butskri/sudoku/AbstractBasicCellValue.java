@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 public abstract class AbstractBasicCellValue<T> implements CellValue<T> {
 
+	@Override
 	public T getValue() {
 		if (isSolved()) {
 			return getAllPossibleValues().iterator().next();
@@ -12,10 +13,12 @@ public abstract class AbstractBasicCellValue<T> implements CellValue<T> {
 		return null;
 	}
 
+	@Override
 	public boolean isOpgave() {
 		return false;
 	}
 
+	@Override
 	public boolean isSolved() {
 		return getAllPossibleValues().size() == 1;
 	}
